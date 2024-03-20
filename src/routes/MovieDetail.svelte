@@ -1,3 +1,5 @@
+<!-- src/routes/MovieDetail.svelte -->
+
 <script context="module">
     export async function load({ params }) {
       // Получаем информацию о фильме из параметров маршрута
