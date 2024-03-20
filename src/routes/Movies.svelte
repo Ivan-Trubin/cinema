@@ -1,8 +1,8 @@
-<!-- src/routes/Movies.svelte -->
+<!-- src/routes/movies.svelte -->
 
-<script>
+<script context="module">
     // Заглушка данных о фильмах (ваш список фильмов)
-    let movies = [
+    export const movies = [
       { title: 'Фильм 1', description: 'Описание фильма 1' },
       { title: 'Фильм 2', description: 'Описание фильма 2' },
       { title: 'Фильм 3', description: 'Описание фильма 3' },
@@ -10,10 +10,26 @@
     ];
   </script>
   
-  <h2>Список фильмов:</h2>
+  <script>
+    import { onMount } from 'svelte';
+  
+    let title = 'Список фильмов';
+    let moviesList = [];
+  
+    onMount(async () => {
+      // Загрузка списка фильмов
+      moviesList = movies;
+    });
+  </script>
+  
+  <svelte:head>
+    <title>{title}</title>
+  </svelte:head>
+  
+  <h2>{title}</h2>
   
   <ul>
-    {#each movies as movie}
-      <li><a href="/movies/{encodeURIComponent(movie.title)}">{movie.title}</a></li>
+    {#each moviesList as movie}
+      <li><a href="movies/{encodeURIComponent(movie.title)}">{movie.title}</a></li>
     {/each}
   </ul>
